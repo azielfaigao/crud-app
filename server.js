@@ -71,10 +71,6 @@ app.delete('/album/:id', asyncHandler(async (req, res, next) => {
     res.redirect('/all-albums');
 }));
 
-app.get('/new-album', (req, res) => {
-    res.render('albums/new');
-});
-
 app.get('*', (req, res, next) => {
     next(new errHandler('This page does not exist', 404));
 });
