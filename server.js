@@ -8,9 +8,13 @@ const Album = require('./models/album');
 const errHandler = require('./handlers/errHandler');
 const asyncHandler = require('./handlers/asyncHandler');
 
+let uri = process.env.MONGODB_URI;
+if (uri == null || uri == "") {
+    uri = 'mongodb://localhost/musicHub';
+}
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
-mongoose.connect('mongodb://localhost/musicHub', {
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
