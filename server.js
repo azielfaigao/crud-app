@@ -57,7 +57,7 @@ app.put('/album/:id', asyncHandler(async (req, res, next) => {
     if (!album) {
         return next(new errHandler('Cannot update non-existent item', 404));
     };
-    await Album.updateOne({_id: id}, { ...req.body.album, new: true });
+    await Album.updateOne({ _id: id }, { ...req.body.album, new: true });
     res.redirect(`/album/${album._id}`);
 }));
 
@@ -67,7 +67,7 @@ app.delete('/album/:id', asyncHandler(async (req, res, next) => {
     if (!album) {
         return next(new errHandler('Cannot delete non-existent item', 404));
     }
-    await Album.deleteOne({_id: id});
+    await Album.deleteOne({ _id: id });
     res.redirect('/all-albums');
 }));
 
@@ -81,7 +81,10 @@ app.use((err, req, res, next) => {
 });
 
 
-const PORT = 4400;
+let PORT = process.env.PORT;
+if (PORT == null || PORT == "") {
+    PORT = 4400;
+}
 app.listen(PORT, () => {
     console.log(`LISTENING ON PORT ${PORT}`);
 })
