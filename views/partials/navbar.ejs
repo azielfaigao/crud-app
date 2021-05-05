@@ -1,0 +1,77 @@
+<nav class="sticky-top navbar navbar-expand-sm navbar-dark bg-dark px-5 mb-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <!-- icon -->
+      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="music"
+        class="me-1 svg-inline--fa fa-music fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+        width="30px" height="30px">
+        <path fill="currentColor"
+          d="M470.38 1.51L150.41 96A32 32 0 0 0 128 126.51v261.41A139 139 0 0 0 96 384c-53 0-96 28.66-96 64s43 64 96 64 96-28.66 96-64V214.32l256-75v184.61a138.4 138.4 0 0 0-32-3.93c-53 0-96 28.66-96 64s43 64 96 64 96-28.65 96-64V32a32 32 0 0 0-41.62-30.49z">
+        </path>
+      </svg>
+      <!-- icon -->
+      <strong>Sound</strong>Project
+    </a>
+
+    <button class="nav-link btn btn-warning" role="button" id="newButton" data-bs-toggle="modal"
+      data-bs-target="#newAlbumModal">
+      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="plus"
+        class="svg-inline--fa fa-plus fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+        width="22px" height="22px">
+        <path fill="currentColor"
+          d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z">
+        </path>
+      </svg>
+      <!-- icon -->
+      <strong class="d-none d-sm-inline">New album</strong>
+    </button>
+  </div>
+  </div>
+</nav>
+
+<div class="modal fade" id="newAlbumModal" tabindex="-1" aria-labelledby="newAlbum">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newAlbum">Enter new album</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container py-0 d-flex flex-column">
+          <div class="mx-4 mb-2">
+            <form action="/all-albums" method="POST" class="my-3" id="newAlbumForm">
+              <div class="mb-3">
+                <label for="image" class="form-label fw-bold">Image</label>
+                <input type="text" class="form-control" id="image" name="album[image]">
+              </div>
+
+              <div class="mb-3">
+                <label for="title" class="form-label fw-bold">Title</label>
+                <input type="text" class="form-control" id="title" name="album[title]" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="artist" class="form-label fw-bold">Artist</label>
+                <input type="text" class="form-control" id="artist" name="album[artist]" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="genre" class="form-label fw-bold">Genre</label>
+                <input type="text" class="form-control" id="genre" name="album[genre]" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="year" class="form-label fw-bold">Year release</label>
+                <input type="text" class="form-control" id="year" name="album[year]">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input class="btn btn-success" type="submit" form="newAlbumForm">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,166 @@
+<% layout('/layouts/boilerplate')%>
+    <div class="container">
+
+        <h1 class="text-center" id="allAlbums">All Albums</h1>
+
+        <div class="container my-2 d-flex align-content-center">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 mt-2">
+                <!-- album card -->
+                <% for (let album of albums) { %>
+                    <div class="col">
+                        <div class="card p-3 shadow">
+                            <div class="container card-img-top ratio ratio-1x1">
+                                <img src="<%= album.image %>" class="img-fluid p-0" alt="...">
+                            </div>
+
+                            <div class="card-body text-center d-block-flex justify-content-center">
+                                <h5 class="d-block text-center text-truncate">
+                                    <%= album.title %>
+                                </h5>
+                                <small class="card-text">
+                                    <%= album.artist %>
+                                </small>
+                                <br>
+                                <div class="btn-group m-2 p-2" role="group">
+                                    <p class="btn btn-primary btn-sm" role="button" data-bs-toggle="modal"
+                                        data-bs-target="#view<%= album._id %>">View</p>
+                                    <p class="btn btn-primary btn-sm" role="button" data-bs-toggle="modal"
+                                        data-bs-target="#edit<%= album._id %>">Edit</p>
+                                    <p role="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#delete<%= album._id %>">Delete</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- edit modal -->
+                    <div class="modal fade" id="edit<%= album._id %>" tabindex="-1"
+                        aria-labelledby="edit<%= album._id %>Modal">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="edit<%= album._id %>Modal">Edit <%= album.title %>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container my-2 px-5">
+                                        <div class="ratio ratio-1x1 mb-3">
+                                            <img src="<%= album.image %>" class="img-thumbnail"
+                                                alt="<%= album.image %>">
+                                        </div>
+                                        <form action="/album/<%= album._id %>?_method=PUT" method="POST"
+                                            id="edit<%= album._id %>Form">
+                                            <div class="mb-3">
+                                                <label for="image" class="form-label"><strong>Image</strong></label>
+                                                <input type="text" class="form-control" id="image" name="album[image]"
+                                                    value="<%= album.image %>" required>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="title" class="form-label"><strong>Title</strong></label>
+                                                <input type="text" class="form-control" id="title" name="album[title]"
+                                                    value="<%= album.title %>" required>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="artist" class="form-label"><strong>Artist</strong></label>
+                                                <input type="text" class="form-control" id="artist" name="album[artist]"
+                                                    value="<%= album.artist %>" required>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="genre" class="form-label"><strong>Genre</strong></label>
+                                                <input type="text" class="form-control" id="genre" name="album[genre]"
+                                                    value="<%= album.genre %>" required>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="year" class="form-label"><strong>Year
+                                                        release</strong></label>
+                                                <input type="number" class="form-control" id="year" name="album[year]"
+                                                    value="<%= album.year %>" min="1000" max="2021">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input class="btn btn-success" type="submit" form="edit<%= album._id %>Form">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- delete modal-->
+                    <div class="modal fade" id="delete<%= album._id %>" data-bs-backdrop="static"
+                        data-bs-keyboard="false" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Delete <%= album.title %>?
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h5>This cannot be undone.</h5>
+                                </div>
+                                <div class="modal-footer">
+                                    <form action="/album/<%=album._id%>?_method=DELETE" method="POST">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- view modal -->
+                    <div class="modal fade" id="view<%= album._id %>" tabindex="-1"
+                        aria-labelledby="view<%= album._id %>Modal">
+                        <div class="modal-dialog modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header px-4">
+                                    <h5 class="modal-title fs-4" id="view<%= album._id %>Modal">
+                                        <%= album.title %>
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container my-4 px-5">
+                                        <div class="ratio ratio-1x1 mb-4">
+                                            <img src="<%= album.image %>" class="img-thumbnail"
+                                                alt="<%= album.image %>">
+                                        </div>
+                                        <div class="text-center d-block-flex align-content-center fs-5">
+                                            <p><strong>Artist</strong>
+                                                <br>
+                                                <%= album.artist %>
+                                            </p>
+
+                                            <p class="text-capitalize"><strong>Genre</strong>
+                                                <br>
+                                                <%= album.genre %>
+                                            </p>
+
+                                            <p><strong>Year released</strong>
+                                                <br>
+                                                <%= album.year %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+
+
+            </div>
+        </div>
+    </div>

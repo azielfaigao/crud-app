@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;600&family=Poppins:wght@300;400;700&display=swap');
+body {
+     background-color: #FCFFF7;
+     color: #534B52;
+}
+
+nav, footer {
+     font-family: Poppins;
+}
+
+.card, .modal-content {
+     background-color: #F1F0EA;
+}
+
+div.ratio img {
+     object-fit: cover;
+}
+
+.btn {
+     border: none;
+}
+
+.btn-secondary {
+     background-color: #534B52;
+}
+
+.btn-success {
+     background-color: #34623F;
+}
+
+.btn-primary {
+     background-color: #2ab8b8;
+}
+
+.btn-primary:hover {
+     background-color: #21A0A0;
+}
+
+.btn-warning {
+     background-color: #FFED65;
+}
+
+.btn-danger:hover {
+     background-color: #ac2835;
+}
+
+.form-control {
+     border: none;
+     border-radius: 0%;
+     background-color: transparent;
+     border-bottom: 2px solid #534B52;
+}
+
+.form-control:focus, .form-control:active {
+     border-bottom: 2px solid #534B52;
+     background-color: transparent;
+     outline: none;
+}
